@@ -5,20 +5,20 @@ services:
     build:
       context: .
     ports:
-      -"80:80"
+      - "8000:8000"
     volumes:
       - ./app:/app
     command: >
-      sh -c "uvicorn api.main:app --host 0.0.0.0 --port 80"
+      sh -c "uvicorn api.main:app --host 0.0.0.0"
     depends_on:
       - db
 
   db:
     image: library/postgres:11-alpine
     environment:
-      - POSTGRES_DB: fastdb
-      - POSTGRES_USER: user
-      - POSTGRES_PASSWORD: pass
+      - POSTGRES_DB=db
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
     volumes:
     - postgres_data:/var/lib/postgresql/data/
     ports:
